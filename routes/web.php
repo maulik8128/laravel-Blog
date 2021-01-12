@@ -1,13 +1,16 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CategoryController;
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 
 // Route::get('posts/{id}',function($id){
@@ -80,6 +83,27 @@ Route::get('/about', function(){
 
 })->name('about');
 
+
+
+Route::get('/category/all',[CategoryController::class,'Allcat'])->name('all.category');
+
+Route::get('/category/edit/{id}', [CategoryController::class, 'Edit']);
+
+Route::post('/category/update/{id}',[CategoryController::class, 'Update']);
+
+Route::get('/softdelete/category/{id}',[categoryController::class, 'SoftDelete']);
+
+Route::get('/category/restore/{id}',[categoryController::class, 'Restore']);
+
+Route::get('/pdelete/category/{id}',[CategoryController::class,'Pdelete']);
+
+
+Route::post('/category/add', [CategoryController::class, 'AddCat'])->name('store.category');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+
+    // $users = User::all();
+    $users = DB::table('users')->get();
+
+    return view('dashboard' , compact('users'));
 })->name('dashboard');
