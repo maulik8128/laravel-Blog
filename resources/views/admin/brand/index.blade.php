@@ -62,7 +62,7 @@
                                         <td>{{ $brand->brand_name }}</td>
                                         {{-- <td>{{ $brand->user->name }}</td> Eloquent
                                         --}}
-                                        <td><img src="" alt=""></td>
+                                        <td><img src="{{ asset($brand->brand_image) }}" style="height:40px; width:70px"  alt=""></td>
 
                                         @if ($brand->created_at == null)
 
@@ -76,9 +76,9 @@
 
                                         <td>
 
-                                            <a href="{{ url('category/edit/' . $brand->id) }}"
+                                            <a href="{{ url('brand/edit/' . $brand->id) }}"
                                                 class="btn btn-info">Edit</a>
-                                            <a href="{{ url('softdelete/category/' . $brand->id) }}"
+                                            <a href="{{ url('softdelete/brand/' . $brand->id) }}"
                                                 class="btn btn-danger">SDelete</a>
 
 
